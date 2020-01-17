@@ -57,6 +57,19 @@ Tmux是类似screen的终端复用工具，可以远程运行并挂起终端，�
 ## ml-workspace
 一个包含了常见的深度学习库和jupyter notebook的docker镜像，可以通过环境变量配置密码以及各种容器属性。具体配置参考[ml-workspace](https://github.com/ml-tooling/ml-workspace)
 
+## Git
+命令行设置Git用户名和邮箱
+
+* 全局(所有仓库)
+  
+  ```git conig --global user.name "PanYicheng"```
+
+  ```git conig --global user.email "1316699379@qq.com"```
+* 局部(单个仓库)
+  
+  ```git conig user.name "PanYicheng"```
+
+  ```git conig user.email "1316699379@qq.com"```
 
 
 [1]: https://stackoverflow.com/questions/15227130/using-a-socks-proxy-with-git-for-the-http-transport "Stackoverflow"
