@@ -62,3 +62,5 @@ set fileencoding=utf-8
 :  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
 :  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 :augroup END
+" Set paste mode with key <F2>
+set pastetoggle=<F2>
