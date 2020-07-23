@@ -30,7 +30,7 @@ Plugin 'tpope/vim-fugitive'
 " Install L9 and avoid a Naming conflict if you've already installed a
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
-
+Plugin 'fatih/vim-go'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -45,8 +45,6 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
-
-set paste                     " enable paste from ssh terminal like Xshell
 
 set tabstop=4
 set shiftwidth=4
@@ -64,3 +62,5 @@ set fileencoding=utf-8
 :augroup END
 " Set paste mode with key <F2>
 set pastetoggle=<F2>
+" Toggle line numbers from none to all
+noremap <F3> :set invnumber invrelativenumber<CR>
