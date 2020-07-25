@@ -47,11 +47,11 @@ sudo make install
 ## Tmux
 Tmux是类似screen的终端复用工具，可以远程运行并挂起终端，并且可以同步多个远程终端。
 
-配置文件为本目录下的```.tmux.conf```文件，将其内容添加到用户目录下的同名文件即可。
+配置文件为本目录下的```.tmux.conf```文件，将其内容添加到用户目录下的同名文件即可。可以参考[tmux-bash-completion][2]配置bash的命令补全功能，将```completions/tmux```文件存到```/usr/share/bash-completion/completions/```即可。
 
 ### Key Binding Definitions
-* Ctrl-A %: split panel vertically
-* Ctrl-A ": split panel horizontally
+* Ctrl-A %: split pane vertically
+* Ctrl-A ": split pane horizontally
 * Ctrl-A hjkl: move between panels like vim's hjkl
 * Ctrl-A c: create new window
 * Ctrl-A [: copy mode (can scrollback the buffer)
@@ -96,3 +96,4 @@ Tmux是类似screen的终端复用工具，可以远程运行并挂起终端，�
 * 创建时间 2020-03-28 09:29:34
 
 [1]: https://stackoverflow.com/questions/15227130/using-a-socks-proxy-with-git-for-the-http-transport "Stackoverflow"
+[2]: https://github.com/imomaliev/tmux-bash-completion "tmux-bash-completion"
