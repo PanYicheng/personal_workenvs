@@ -5,44 +5,47 @@
 * ml-workspace
 
 ## Vim
-建议安装vim 8.0版本。该版本支持插件的异步执行，能很大的提高插件的载入速度，可通过```vim --version```查看。
+建议安装vim 8.0及以上的版本。这些版本支持插件的异步执行，能很大的提高插件的载入速度。可通过```vim --version```查看版本信息。
 
-可以选择如下安装方式：
-### PPA
-适用于系统为Ubuntu 16.04, Ubuntu 14.04, Linux Mint 18/17和它们的衍生版本
-```bash
-add-apt-repository ppa:jonathonf/vim
-apt update
-apt install vim
-```
-移除Vim以及PPA
-```bash
-apt remove vim
-sudo apt install ppa-purge && sudo ppa-purge ppa:jonathonf/vim
-```
+安装方式：
+1.  PPA
 
-### Git
-从源码编译安装
-```
-sudo apt install git
-git clone https://github.com/vim/vim.git
-cd vim
-./configure
-sudo apt install ncurses-dev
-make
-sudo make install
-```
+    对于系统为Ubuntu 16.04, Ubuntu 14.04, Linux Mint 18/17和它们的衍生版本，需要添加自定义的ppa，如下。对于Ubuntu 20.04，不需要添加ppa。
+    ```bash
+    # 添加ppa
+    sudo add-apt-repository ppa:jonathonf/vim
+    # 移除ppa
+    sudo apt install ppa-purge && sudo ppa-purge ppa:jonathonf/vim
+    ```
+    安装即可使用如下命令：
+    ```
+    apt update
+    apt install vim
+    ```
+2.  Git 从源码编译安装
+    ```
+    sudo apt install git
+    git clone https://github.com/vim/vim.git
+    cd vim
+    ./configure
+    sudo apt install ncurses-dev
+    make
+    sudo make install
+    ```
 
 ### Vundle
 插件管理器[Vundle](https://github.com/VundleVim/Vundle.vim)，用于自动化地安装和移除其他插件的工具。
 安装方法：
 ```git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim```
 
-将```vim.vimrc```的内容写入```~/.vimrc```，并在vim内运行```:PluginInstall```就可以完成插件的安装。
+将```vundle.vimrc```的内容写入```~/.vimrc```，并在vim内运行```:PluginInstall```就可以完成插件的安装。
 
 > 该过程使用git下载插件的文件，如果git需要设置代理，则可以使用如下指令，参考[Stackoverfloww][1]\
 > 使用代理```git config --global http.proxy 'socks5://127.0.0.1:7070'```\
 > 关闭代理```git config --global --unset http.proxy```
+
+### Vim-plug
+另一个vim插件管理器[vim-plug](https://github.com/junegunn/vim-plug)。
 
 ## Tmux
 Tmux是类似screen的终端复用工具，可以远程运行并挂起终端，并且可以同步多个远程终端。
