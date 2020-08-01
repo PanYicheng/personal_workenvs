@@ -45,14 +45,48 @@
 > 关闭代理```git config --global --unset http.proxy```
 
 ### Vim-plug
-另一个vim插件管理器[vim-plug](https://github.com/junegunn/vim-plug)。
+另一个vim插件管理器[vim-plug](https://github.com/junegunn/vim-plug)，功能相比Vundle更丰富一点，也是我目前使用的。基于此插件的vim配置文件为vim-plug.vimrc，可以复制使用，目前我使用了如下设置：
+* Paste toggle with \<F2>
+* Line number toggle with \<F3>
+* [NerdTree Explorer](https://github.com/preservim/nerdtree) with \<F4>
+* Colorscheme [afterglow](https://github.com/danilo-augusto/vim-afterglow)
+> Colorscheme afterglow：在tmux内的vim内该配色可能无法正确显示，这是由于tmux内的$TERM变量没有设置成256color，可以在```.tmux.conf```中添加```set -g default-terminal "xterm-256color"```解决。如果terminal不支持256color，最好保持默认，不添加该命令。参考[Link](https://vi.stackexchange.com/questions/10708/no-syntax-highlighting-in-tmux)。
+
+## Powerline
+[Powerline](https://github.com/powerline/powerline)是一款状态栏插件，可用于vim、bash、tmux等。这里记录下我安装使用的一些步骤。
+
+### Installation
+在ubuntu下安装可以直接使用apt，即```sudo apt install powerline```。安装之后```{repository_root}```可以通过命令```sudo dpkg -L powerline```查看，在Ubuntu下应该为```/usr/share/```。
+### Bash prompts intergration
+在bash中使用只需在bashrc中增加如下内容。其中POWERLINE_BASH_*的设置是为了优化PS2，PS3，使其只会计算一次。
+```
+powerline-daemon -q
+POWERLINE_BASH_CONTINUATION=1
+POWERLINE_BASH_SELECT=1
+. {repository_root}/powerline/bindings/bash/powerline.sh
+```
+### Tmux statusline
+设置Tmux的状态栏，可以将如下命令添加到```~/.tmux.conf```中。该设置脚本依赖于```powerline-config```命令，如果系统PATH中没有该命令，可以设置环境变量```$POWERLINE_CONFIG_COMMAND```，用以指向该命令。
+```
+run-shell "powerline-daemon -q"
+source "{repository_root}/powerline/bindings/tmux/powerline.conf"
+```
+### Vim statusline
+设置vim中的状态栏，将如下命令添加到```~/.vimrc```中即可。其中的```python```可能需要替换成系统上可用的版本，如在我的设置里就是```python3```。其中最后设置的```laststatus```是为了始终显示状态栏，可查看vim的帮助了解更多信息```:h laststatus```。设置参考[Link](https://devpro.media/install-powerline-ubuntu/#configure-vim)。
+```
+" powerline statusline
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+set laststatus=2
+```
 
 ## Tmux
 Tmux是类似screen的终端复用工具，可以远程运行并挂起终端，并且可以同步多个远程终端。
 
 配置文件为本目录下的```.tmux.conf```文件，将其内容添加到用户目录下的同名文件即可。可以参考[tmux-bash-completion][2]配置bash的命令补全功能，将```completions/tmux```文件存到```/usr/share/bash-completion/completions/```即可。
 
-### Key Binding Definitions
+Key Binding Definitions
 * Ctrl-A %: split pane vertically
 * Ctrl-A ": split pane horizontally
 * Ctrl-A hjkl: move between panels like vim's hjkl
@@ -65,29 +99,24 @@ Tmux是类似screen的终端复用工具，可以远程运行并挂起终端，�
 
 ## Git
 命令行设置Git用户名和邮箱
-
 * 全局(所有仓库)
-  
-  ```git conig --global user.name "PanYicheng"```
-
-  ```git conig --global user.email "1316699379@qq.com"```
-* 局部(单个仓库)
-  
-  ```git conig user.name "PanYicheng"```
-
-  ```git conig user.email "1316699379@qq.com"```
+  ```
+  git conig --global user.name "PanYicheng"
+  git conig --global user.email "1316699379@qq.com"
+  ```
+* 局部(单个仓库)：取消上面指令中的```--global```即可。
 
 ## Database
 在GPU10上配置自用的数据库容器，采用docker compose方式。
 配置文件为本目录下的mysqlserver.yaml文件。这里设置了附加的volumn来保存数据库文件。
-### Container Network
-为了使得其他容器可以访问数据库容器，配置了桥接网络myNetwork，其
-参数如下，然后将需要访问数据库的容器加入到这个网络即可。
-| Name | Value |
-| - | - |
-| driver | bridge|
-|subnet| 173.21.11.0/24|
-|gateway| 173.21.11.1 |
+
+> 为了使得其他容器可以访问数据库容器，配置了桥接网络myNetwork，其
+  参数如下，然后将需要访问数据库的容器加入到这个网络即可。
+> | Name | Value |
+> | - | - |
+> | driver | bridge|
+> |subnet| 173.21.11.0/24|
+> |gateway| 173.21.11.1 |
 
 
 # Router DDNS
