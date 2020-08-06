@@ -101,10 +101,16 @@ Key Binding Definitions
 命令行设置Git用户名和邮箱
 * 全局(所有仓库)
   ```
-  git conig --global user.name "PanYicheng"
-  git conig --global user.email "1316699379@qq.com"
+  git config --global user.name "PanYicheng"
+  git config --global user.email "1316699379@qq.com"
   ```
 * 局部(单个仓库)：取消上面指令中的```--global```即可。
+
+保存Git账号密码
+* 全局
+  ```
+  git config --global credential.helper store
+  ```
 
 ## Database
 在GPU10上配置自用的数据库容器，采用docker compose方式。
