@@ -49,7 +49,7 @@
 * Paste toggle with \<F2>
 * Line number toggle with \<F3>
 * [NerdTree Explorer](https://github.com/preservim/nerdtree) with \<F4>
-* Colorscheme [afterglow](https://github.com/danilo-augusto/vim-afterglow)
+* ~~Colorscheme [afterglow](https://github.com/danilo-augusto/vim-afterglow)~~ 由Solarized代替
 > Colorscheme afterglow：在tmux内的vim内该配色可能无法正确显示，这是由于tmux内的$TERM变量没有设置成256color，可以在```.tmux.conf```中添加```set -g default-terminal "xterm-256color"```解决。如果terminal不支持256color，最好保持默认，不添加该命令。参考[Link](https://vi.stackexchange.com/questions/10708/no-syntax-highlighting-in-tmux)。
 
 ## Powerline
@@ -93,6 +93,53 @@ Key Binding Definitions
 * Ctrl-A c: create new window
 * Ctrl-A [: copy mode (can scrollback the buffer)
 * Ctrl-A ,: change window name
+
+## Solarized Colorscheme
+[Solarized Colorscheme](https://github.com/altercation/solarized)是一个美观使用的颜色体系，可以很好地支持各种代码的高亮。该颜色主题适配到了各种工具中，如Tmux、Vim等。本文档记录个人使用该主题的安装方法。
+### Vim solarized
+安装Vim的Solarized配色可参考子仓库[vim-colors-solarized](https://github.com/altercation/vim-colors-solarized)的说明。这里采用Option 2的插件安装：在```~/.vimrc```的vim-plug区域加入
+```
+" Solarized colorscheme
+Plug 'https://github.com/altercation/vim-colors-solarized'
+```
+然后运行```:PlugInstall```下载插件，然后在```~/.vimrc```中加入设置主题的代码（其中background可根据需要设置为暗色dark或亮色light，当终端不能支持较多颜色时可设置16色模式，最后设置了F5按键切换背景颜色）：
+```
+" Set colorscheme
+syntax enable
+set background=dark/light
+" let g:solarized_termcolors=16
+" set t_Co=16
+colorscheme solarized
+call togglebg#map("<F5>")
+```
+### Windows Terminal
+为让Windows Terminal正确显示Solarized主题，需要设置对应Profile的配色主题为Solarized Dark或Solarized Light。具体在Ubuntu profiles中添加
+ColorScheme即可
+```
+"profiles": {
+  "list": [{
+      ...Ubuntu Profile...
+      "colorScheme": "Solarized Dark"
+      ......
+    }]}
+```
+### Powerline adaptation
+为了让powerline能够正确显示solarized配色，还需修改其配置，在```~/.config/powerline/config.json```中增加如下内容修改powerline在vim，shell和tmux中配色，匹配solarized。
+```
+{
+  "ext": {
+    "shell": {
+      "colorscheme": "solarized"
+    },
+    "tmux": {
+      "colorscheme": "solarized"
+    },
+    "vim": {
+      "colorscheme": "solarized"
+    }
+  }
+}
+```
 
 ## ml-workspace
 一个包含了常见的深度学习库和jupyter notebook的docker镜像，可以通过环境变量配置密码以及各种容器属性。具体配置参考[ml-workspace](https://github.com/ml-tooling/ml-workspace)

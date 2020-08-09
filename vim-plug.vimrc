@@ -34,6 +34,8 @@ Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
 " Unmanaged plugin (manually installed and updated)
 " Plug '~/my-prototype-plugin'
 
+" Solarized colorscheme
+Plug 'https://github.com/altercation/vim-colors-solarized'
 " Initialize plugin system
 call plug#end()
 
@@ -52,8 +54,16 @@ set pastetoggle=<F2>
 noremap <F3> :set invnumber invrelativenumber<CR>
 " Set NERDToggle to key <F3>
 map <F4> :NERDTreeToggle<CR>
-" Set colorscheme to plugin afterglow, see plug url above
-colorscheme afterglow
+
+" Set colorscheme
+syntax enable
+set background=dark
+" let g:solarized_termcolors=16
+" set t_Co=16
+colorscheme solarized
+" colorscheme afterglow
+call togglebg#map("<F5>")
+
 " powerline statusline
 python3 from powerline.vim import setup as powerline_setup
 python3 powerline_setup()
