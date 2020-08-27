@@ -3,6 +3,7 @@
 * vim
 * tmux
 * ml-workspace
+* solarized colorscheme
 
 ## Vim
 建议安装vim 8.0及以上的版本。这些版本支持插件的异步执行，能很大的提高插件的载入速度。可通过```vim --version```查看版本信息。
@@ -140,6 +141,15 @@ ColorScheme即可
   }
 }
 ```
+
+### GNU ls
+使用Solarized colorscheme之后，通常GNU ls显示的颜色会很模糊，这时需要修改它的配色方案。[dircolors-solarized](https://github.com/seebi/dircolors-solarized)给出了一个解决方法。
+
+该github库中包含多个GNU ls配色，只需运行如下命令就可以切换配色。
+```
+eval `dircolors /path/to/dircolorsdb
+```
+为了启动时使用可以创建```~/.dir_colors/```文件夹并添加到bashrc中去。
 
 ## ml-workspace
 一个包含了常见的深度学习库和jupyter notebook的docker镜像，可以通过环境变量配置密码以及各种容器属性。具体配置参考[ml-workspace](https://github.com/ml-tooling/ml-workspace)
