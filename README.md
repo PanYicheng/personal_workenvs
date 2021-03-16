@@ -147,7 +147,7 @@ ColorScheme即可
 
 该github库中包含多个GNU ls配色，只需运行如下命令就可以切换配色。
 ```
-eval `dircolors /path/to/dircolorsdb
+eval `dircolors /path/to/dircolorsdb`
 ```
 为了启动时使用可以创建```~/.dir_colors/```文件夹并添加到bashrc中去。
 
